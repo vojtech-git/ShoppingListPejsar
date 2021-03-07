@@ -12,7 +12,7 @@ namespace ShoppingListPejsar
 {
     public partial class Form1 : Form
     {
-        int position;
+        public List<ItemRow> ItemColumn;
 
         public Form1()
         {
@@ -21,35 +21,44 @@ namespace ShoppingListPejsar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            position = 120;
+            ItemColumn = new List<ItemRow>();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        { 
-            TextBox txtBox = new TextBox();
-            txtBox.Location = new Point(90, position);
-            this.Controls.Add(txtBox);
-
-            CheckBox checkBox = new CheckBox();
-            checkBox.Location = new Point(470, position);
-            this.Controls.Add(checkBox);
-
-            Button btn = new Button();
-            btn.Location = new Point(600, position);
-            btn.Text = "odstraňit";
-            btn.AutoSize = true;
-            this.Controls.Add(btn);
-            btn.Click += new EventHandler(Btn_Click);
-
-            btnAdd.Location = new Point(80, position + 50);
-            position += 30;
-        }
-
-        private void Btn_Click(object sender, EventArgs e)
+        public void btnAdd_Click(object sender, EventArgs e)
         {
-            
+            ItemRow itemRow = new ItemRow(btnAdd.Left, btnAdd.Top, ItemColumn.Count);
+            ItemColumn.Add(itemRow);
+
+            itemRow.Smazat.Click += DeleteRow;
+
+            Controls.Add(itemRow.ItemName);
+            Controls.Add(itemRow.Hotovo);
+            Controls.Add(itemRow.Smazat);
+
+            btnAdd.Top += 50;
         }
 
+        public void DeleteRow (object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int index = (button.Tag as ItemRow).index;
+
+            for (int i = index + 1; i < ItemColumn.Count; i++)
+            {
+                ItemColumn[i].ItemName.Top -= 50;
+                ItemColumn[i].Hotovo.Top -= 50;
+                ItemColumn[i].Smazat.Top -= 50;
+                (ItemColumn[i].Smazat.Tag as ItemRow).index--;
+            }
+
+            Controls.Remove(ItemColumn[index].ItemName);
+            Controls.Remove(ItemColumn[index].Hotovo);
+            Controls.Remove(ItemColumn[index].Smazat);
+            ItemColumn.Remove(ItemColumn[index]);
+            btnAdd.Top -= 50;
+
+            Refresh();
+        }
     }
 
     public class Item
@@ -62,6 +71,36 @@ namespace ShoppingListPejsar
 
             CheckBox itemCheckBox = new CheckBox();
             itemCheckBox.Location = new Point(position);
+        }
+    }
+
+    public class ItemRow
+    {
+        public TextBox ItemName;
+        public CheckBox Hotovo;
+        public Button Smazat;
+        public int index;
+
+        public ItemRow (int positionX, int positionY, int aIndex)
+        {
+            ItemName = new TextBox();
+            ItemName.Left = positionX;
+            ItemName.Top = positionY;
+            ItemName.Width = 350;
+
+            Hotovo = new CheckBox();
+            Hotovo.Checked = false;
+            Hotovo.Left = ItemName.Left + ItemName.Width + 40;
+            Hotovo.Top = positionY;
+            Hotovo.Width = Hotovo.Height;
+
+            Smazat = new Button();
+            Smazat.Left = Hotovo.Left + Hotovo.Width + 40;
+            Smazat.Top = positionY;
+            Smazat.Tag = this;
+            Smazat.Text = "Smazat";
+
+            index = aIndex;
         }
     }
 }

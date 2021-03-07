@@ -30,6 +30,7 @@
         {
             this.labelHotovo = new System.Windows.Forms.Label();
             this.labelCoKoupit = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelHotovo
@@ -50,11 +51,22 @@
             this.labelCoKoupit.TabIndex = 4;
             this.labelCoKoupit.Text = "CoKoupit";
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(59, 138);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(22, 22);
+            this.btnAdd.TabIndex = 5;
+            this.btnAdd.Text = "+";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.labelCoKoupit);
             this.Controls.Add(this.labelHotovo);
             this.Name = "Form1";
@@ -67,6 +79,7 @@
         #endregion
         private System.Windows.Forms.Label labelHotovo;
         private System.Windows.Forms.Label labelCoKoupit;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
 

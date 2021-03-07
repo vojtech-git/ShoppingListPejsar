@@ -36,7 +36,7 @@
             // labelHotovo
             // 
             this.labelHotovo.AutoSize = true;
-            this.labelHotovo.Location = new System.Drawing.Point(524, 73);
+            this.labelHotovo.Location = new System.Drawing.Point(470, 90);
             this.labelHotovo.Name = "labelHotovo";
             this.labelHotovo.Size = new System.Drawing.Size(40, 13);
             this.labelHotovo.TabIndex = 3;
@@ -45,7 +45,7 @@
             // labelCoKoupit
             // 
             this.labelCoKoupit.AutoSize = true;
-            this.labelCoKoupit.Location = new System.Drawing.Point(109, 73);
+            this.labelCoKoupit.Location = new System.Drawing.Point(110, 90);
             this.labelCoKoupit.Name = "labelCoKoupit";
             this.labelCoKoupit.Size = new System.Drawing.Size(50, 13);
             this.labelCoKoupit.TabIndex = 4;
@@ -53,7 +53,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(59, 138);
+            this.btnAdd.Location = new System.Drawing.Point(80, 170);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(22, 22);
             this.btnAdd.TabIndex = 5;
@@ -71,6 +71,7 @@
             this.Controls.Add(this.labelHotovo);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
